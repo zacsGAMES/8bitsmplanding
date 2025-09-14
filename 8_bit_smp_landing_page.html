@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8BitSMP - Minecraft Server</title>
+  <style>
+    :root {
+      --green: #2ecc71;
+      --dark-green: #27ae60;
+      --bg: #111;
+      --text: #eee;
+    }
+    body {
+      font-family: 'Press Start 2P', cursive, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: var(--green);
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    header h1 {
+      margin: 0;
+      color: #fff;
+      text-shadow: 2px 2px var(--dark-green);
+    }
+    .server-icon {
+      margin: 1rem auto;
+      width: 64px;
+      height: 64px;
+      image-rendering: pixelated;
+      background-color: #000;
+    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: var(--dark-green);
+    }
+    footer {
+      padding: 1rem;
+      font-size: 0.8rem;
+      background: #000;
+    }
+    .staff-board {
+      background: #1b1b1b;
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: inline-block;
+      text-align: left;
+    }
+    .staff-board h3 {
+      margin-top: 0;
+      color: var(--green);
+    }
+    .rules {
+      background: #1b1b1b;
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: inline-block;
+      text-align: left;
+    }
+    .rules h2 {
+      color: var(--green);
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌿 8BitSMP 🌿</h1>
+    <img id="server-icon" class="server-icon" src="" alt="Server Icon" />
+  </header>
+
+  <section>
+    <h2>About the Server</h2>
+    <p>Welcome to <strong>8BitSMP</strong>! A pure Fabric Minecraft server on version <strong>1.21.8</strong>. <br>
+    No plugins. No mods. Just community trust for security. Join and be part of the adventure!</p>
+    <p><strong>Server IP:</strong> <span id="server-ip">8bitsmp.ddns.net</span></p>
+    <p><strong>Players Online:</strong> <span id="player-count">Loading...</span></p>
+
+    <a href="https://discord.gg/QcFaDTavxP" target="_blank" class="btn">Join Discord</a>
+    <a href="https://paypal.me/zacsGAMES" target="_blank" class="btn">Donate</a>
+  </section>
+
+  <section>
+    <h2>Staff Board</h2>
+    <div class="staff-board">
+      <h3>Owner</h3>
+      <p>8BitZac / Coding58</p>
+      <h3>Admins</h3>
+      <p>PipsPlays1</p>
+    </div>
+  </section>
+
+  <section class="rules">
+    <h2>General Rules</h2>
+    <ul>
+      <li>No griefing or destroying other players' builds.</li>
+      <li>No swearing or offensive language.</li>
+      <li>Respect all players and staff.</li>
+      <li>No cheating, exploits, or hacks.</li>
+      <li>Have fun and be friendly!</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 8BitSMP Community. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const serverIP = "8bitsmp.ddns.net";
+    document.getElementById("server-ip").innerText = serverIP;
+
+    async function fetchServerStatus() {
+      try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        const data = await response.json();
+
+        if (data && data.players && typeof data.players.online !== 'undefined') {
+          document.getElementById("player-count").innerText = `${data.players.online} / ${data.players.max}`;
+        } else {
+          document.getElementById("player-count").innerText = "Offline";
+        }
+
+        if (data && data.icon) {
+          if (data.icon.startsWith('data:image')) {
+            document.getElementById("server-icon").src = data.icon;
+          } else {
+            document.getElementById("server-icon").src = '';
+          }
+        }
+      } catch (e) {
+        console.error('Error fetching server status:', e);
+        document.getElementById("player-count").innerText = "Error";
+      }
+    }
+
+    fetchServerStatus();
+    setInterval(fetchServerStatus, 10000);
+  </script>
+</body>
+</html>
