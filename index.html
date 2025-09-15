@@ -85,6 +85,19 @@
       color: var(--green);
       margin-top: 0;
     }
+    .server-info {
+      background: #1b1b1b;
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: inline-block;
+      text-align: left;
+    }
+    .server-info h2 {
+      color: var(--green);
+      margin-top: 0;
+    }
   </style>
 </head>
 <body>
@@ -95,9 +108,16 @@
 
   <section>
     <h2>About the Server</h2>
-    <p>Welcome to <strong>8BitSMP</strong>! A pure Fabric Minecraft server on version <strong>1.21.8</strong>. <br>
-    No plugins. No mods. Just community trust for security. Join and be part of the adventure!</p>
-    <p><strong>Server IP:</strong> <span id="server-ip">8bitsmp.ddns.net</span></p>
+    <p>Welcome to <strong>8BitSMP</strong>! A Fabric-powered Java <strong>and</strong> Bedrock Minecraft server on version <strong>1.21.8</strong>. <br>
+    Powered by <strong>Fabric</strong>, <strong>GeyserMC</strong>, and <strong>ViaBackwards</strong> for crossplay and compatibility.<br>
+    No plugins. No extra mods. Just community trust for security. Join and be part of the adventure!</p>
+  </section>
+
+  <section class="server-info">
+    <h2>Connection Info</h2>
+    <p><strong>Java Edition IP:</strong> <span id="server-ip">8bitsmp.ddns.net</span></p>
+    <p><strong>Bedrock Edition IP:</strong> 8bitsmp.ddns.net</p>
+    <p><strong>Bedrock Port:</strong> 19132 (default)</p>
     <p><strong>Players Online:</strong> <span id="player-count">Loading...</span></p>
 
     <a href="https://discord.gg/QcFaDTavxP" target="_blank" class="btn">Join Discord</a>
